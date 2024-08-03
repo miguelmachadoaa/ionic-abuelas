@@ -1,0 +1,38 @@
+{
+    "database": "languages.db",
+    "version": 1,
+    "encrypted": false,
+    "mode": "full",
+    "tables": [
+        {
+            "name": "languages",
+            "schema": [
+                {
+                    "column": "name",
+                    "value": "TEXT NOT NULL PRIMARY KEY"
+                }
+            ]
+        },
+        {
+            "name": "crias",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "consumo",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "mortalidad",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "fecha",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
+        }
+    ]
+}
