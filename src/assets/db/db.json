@@ -33,6 +33,115 @@
                     "value": "TEXT NOT NULL "
                 }
             ]
+        },
+        {
+            "name": "usuarios",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "name",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "email",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "password",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
+        },
+        {
+            "name": "almacen",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "codigo_almacen",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "codigo_centro",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "nombre_almacen",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
+        },
+        {
+            "name": "centro",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "codigo_centro",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "codigo_empresa",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "nombre_centro",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
+        },
+        {
+            "name": "empresa",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "codigo_empresa",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "nombre_empresa",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
+        },
+        {
+            "name": "material",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "codigo_material",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "doniminacion_material",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "nombre_material",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "tipo_material",
+                    "value": "TEXT NOT NULL "
+                },
+                {
+                    "column": "lotable",
+                    "value": "TEXT NOT NULL "
+                }
+            ]
         }
     ]
 }
