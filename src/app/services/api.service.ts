@@ -18,8 +18,6 @@ export class ApiService {
   }
 
   postCria(c:any){
-    console.log('send');
-    //return this.http.post(this.apiUrl, c);
     return this.http.post<any>(`${this.apiUrl}`, c);
   }
 

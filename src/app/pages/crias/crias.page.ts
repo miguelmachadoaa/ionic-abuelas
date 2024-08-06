@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SqliteService } from '../../services/sqlite.service';
 import { ApiService } from '../../services/api.service';
+import { CriasService } from 'src/app/services/crias.service';
 
 @Component({
   selector: 'app-crias',
@@ -19,8 +20,7 @@ export class CriasPage implements OnInit {
   public currentDate:string;
 
   constructor(
-    private sqlite: SqliteService,
-    private apiService: ApiService
+    private criasService: CriasService,
   ) { 
 
     const date = new Date();
@@ -39,7 +39,7 @@ export class CriasPage implements OnInit {
 
   read(){
     // Leemos los datos de la base de datos
-    this.sqlite.readCrias().then( (crias: string[]) => {
+    this.criasService.readCrias().then( (crias: string[]) => {
       this.crias = crias;
       console.log("Leido");
       console.log(this.crias);
@@ -55,7 +55,7 @@ export class CriasPage implements OnInit {
 
   create(){
     // Creamos un elemento en la base de datos
-    this.sqlite.createCrias(this.consumo, this.mortalidad, this.currentDate).then( (changes) =>{
+    this.criasService.createCrias(this.consumo, this.mortalidad, this.currentDate).then( (changes) =>{
       console.log(changes);
       console.log("Creado");
       this.consumo = '';

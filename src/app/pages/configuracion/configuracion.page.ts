@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SqliteService } from '../../services/sqlite.service';
 import { ApiService } from '../../services/api.service';
 import { UsersService } from 'src/app/services/users.service';
+import { CriasService } from 'src/app/services/crias.service';
 
 @Component({
   selector: 'app-configuracion',
@@ -19,6 +20,7 @@ export class ConfiguracionPage implements OnInit {
   constructor(
     private sqlite: SqliteService,
     private usersService: UsersService,
+    private criasService: CriasService,
     private apiService: ApiService
   ) { 
 
@@ -75,7 +77,7 @@ export class ConfiguracionPage implements OnInit {
   enviar(){
 
       // Leemos los datos de la base de datos
-      this.sqlite.readCrias().then( (crias: string[]) => {
+      this.criasService.readCrias().then( (crias: string[]) => {
         this.crias = crias;
         console.log("Leido");
         console.log(this.crias);
