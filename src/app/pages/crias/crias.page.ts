@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SqliteService } from '../services/sqlite.service';
-import { DatePipe } from '@angular/common';
-import { ApiService } from '../services/api.service';
+import { SqliteService } from '../../services/sqlite.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-crias',
@@ -19,9 +18,6 @@ export class CriasPage implements OnInit {
 
   public currentDate:string;
 
-  public datos: any;
-
-
   constructor(
     private sqlite: SqliteService,
     private apiService: ApiService
@@ -29,12 +25,6 @@ export class CriasPage implements OnInit {
 
     const date = new Date();
     this.currentDate = date.toISOString();
-
-      this.apiService.getDatos().subscribe((response) => {
-            this.datos = response;
-            console.log(this.datos);
-          });
-
 
     this.consumo='';
     this.mortalidad='';

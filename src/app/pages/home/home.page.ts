@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SqliteService } from '../services/sqlite.service';
+import { SqliteService } from '../../services/sqlite.service';
 
 @Component({
   selector: 'app-home',

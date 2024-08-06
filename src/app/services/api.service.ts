@@ -13,11 +13,17 @@ export class ApiService {
   ) { 
   }
 
-  getDatos() {
-    let datos =  this.http.get(`${this.apiUrl}`);
-    console.log(datos);
-    return datos;
+  getData() {
+    return  this.http.get(`${this.apiUrl}`);
   }
+
+  postCria(c:any){
+    console.log('send');
+    //return this.http.post(this.apiUrl, c);
+    return this.http.post<any>(`${this.apiUrl}`, c);
+  }
+
+
 
 
 }

@@ -167,8 +167,8 @@ export class SqliteService {
       }
 
       // recorremos los datos
-      for (let index = 0; index < response.values.length; index++) {
-        const language = response.values[index];
+      for (const element of response.values) {
+        const language = element;
         languages.push(language.name);
       }
       return languages;
@@ -277,8 +277,8 @@ export class SqliteService {
       }
 
       // recorremos los datos
-      for (let index = 0; index < response.values.length; index++) {
-        const cria = response.values[index];
+      for (const element of response.values) {
+        const cria = element;
         crias.push(cria);
       }
       return crias;
@@ -286,9 +286,9 @@ export class SqliteService {
     }).catch(err => Promise.reject(err))
   }
 
-  async updateCrias(newLanguage: string, originalLanguage: string) {
+  async updateCrias(id: string, consumo: string, mortalidad: string, fecha: string, ) {
     // Sentencia para actualizar un registro
-    let sql = 'UPDATE languages SET name=? WHERE name=?';
+    let sql = 'UPDATE languages SET consumo=?, mortalidad = ?, fecha=? WHERE id=?';
     // Obtengo la base de datos
     const dbName = await this.getDbName();
     // Ejecutamos la sentencia
@@ -298,8 +298,10 @@ export class SqliteService {
         {
           statement: sql,
           values: [
-            newLanguage,
-            originalLanguage
+            consumo,
+            mortalidad,
+            fecha,
+            id
           ]
         }
       ]
@@ -312,9 +314,9 @@ export class SqliteService {
     }).catch(err => Promise.reject(err))
   }
 
-  async deleteCrias(language: string) {
+  async deleteCrias(id: string) {
     // Sentencia para eliminar un registro
-    let sql = 'DELETE FROM languages WHERE name=?';
+    let sql = 'DELETE FROM crias WHERE id=?';
     // Obtengo la base de datos
     const dbName = await this.getDbName();
     // Ejecutamos la sentencia
@@ -324,7 +326,7 @@ export class SqliteService {
         {
           statement: sql,
           values: [
-            language
+            id
           ]
         }
       ]
@@ -336,6 +338,7 @@ export class SqliteService {
       return changes;
     }).catch(err => Promise.reject(err))
   }
+
 
 
 
