@@ -27,6 +27,18 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () => import('./pages/users/users.module').then( m => m.UsersPageModule)
   },
+  {
+    path: 'crias-detalle',
+    loadChildren: () => import('./pages/crias-detalle/crias-detalle.module').then( m => m.CriasDetallePageModule)
+  },
+  {
+    path: 'pesaje',
+    loadChildren: () => import('./pages/pesaje/pesaje.module').then( m => m.PesajePageModule)
+  },
+  {
+    path: 'pesaje-detalle',
+    loadChildren: () => import('./pages/pesaje-detalle/pesaje-detalle.module').then( m => m.PesajeDetallePageModule)
+  },
 ];
 
 @NgModule({

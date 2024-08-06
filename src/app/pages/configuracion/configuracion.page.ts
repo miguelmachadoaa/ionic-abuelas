@@ -77,7 +77,7 @@ export class ConfiguracionPage implements OnInit {
   enviar(){
 
       // Leemos los datos de la base de datos
-      this.criasService.readCrias().then( (crias: string[]) => {
+      this.criasService.readCriasDetalle().then( (crias: string[]) => {
         this.crias = crias;
         console.log("Leido");
         console.log(this.crias);

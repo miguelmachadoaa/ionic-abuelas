@@ -11,9 +11,9 @@ export class CriasService {
     private sqlite: SqliteService
   ) { }
 
-  async createCrias(consumo: string,mortalidad: string, fecha: string) {
+  async createCriasDetalle(consumo: string,mortalidad: string, fecha: string) {
     // Sentencia para insertar un registro
-    let sql = 'INSERT INTO crias (consumo, mortalidad, fecha) VALUES(?, ?, ?)';
+    let sql = 'INSERT INTO crias_detalle (consumo, mortalidad, fecha) VALUES(?, ?, ?)';
     // Obtengo la base de datos
     const dbName = await this.sqlite.getDbName();
     // Ejecutamos la sentencia
@@ -38,9 +38,9 @@ export class CriasService {
     }).catch(err => Promise.reject(err))
   }
 
-  async readCrias() {
+  async readCriasDetalle() {
     // Sentencia para leer todos los registros
-    let sql = 'SELECT * FROM crias';
+    let sql = 'SELECT * FROM crias_detalle';
     // Obtengo la base de datos
     const dbName = await this.sqlite.getDbName();
     // Ejecutamos la sentencia
@@ -67,7 +67,7 @@ export class CriasService {
     }).catch(err => Promise.reject(err))
   }
 
-  async updateCrias(id: string, consumo: string, mortalidad: string, fecha: string, ) {
+  async updateCriasDetalle(id: string, consumo: string, mortalidad: string, fecha: string, ) {
     // Sentencia para actualizar un registro
     let sql = 'UPDATE languages SET consumo=?, mortalidad = ?, fecha=? WHERE id=?';
     // Obtengo la base de datos
@@ -95,9 +95,9 @@ export class CriasService {
     }).catch(err => Promise.reject(err))
   }
 
-  async deleteCrias(id: string) {
+  async deleteCriasDetalle(id: string) {
     // Sentencia para eliminar un registro
-    let sql = 'DELETE FROM crias WHERE id=?';
+    let sql = 'DELETE FROM crias_detalle WHERE id=?';
     // Obtengo la base de datos
     const dbName = await this.sqlite.getDbName();
     // Ejecutamos la sentencia

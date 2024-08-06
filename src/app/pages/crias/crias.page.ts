@@ -39,7 +39,7 @@ export class CriasPage implements OnInit {
 
   read(){
     // Leemos los datos de la base de datos
-    this.criasService.readCrias().then( (crias: string[]) => {
+    this.criasService.readCriasDetalle().then( (crias: string[]) => {
       this.crias = crias;
       console.log("Leido");
       console.log(this.crias);
@@ -55,7 +55,7 @@ export class CriasPage implements OnInit {
 
   create(){
     // Creamos un elemento en la base de datos
-    this.criasService.createCrias(this.consumo, this.mortalidad, this.currentDate).then( (changes) =>{
+    this.criasService.createCriasDetalle(this.consumo, this.mortalidad, this.currentDate).then( (changes) =>{
       console.log(changes);
       console.log("Creado");
       this.consumo = '';
