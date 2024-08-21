@@ -11,13 +11,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid style="margin-top: 1em;">
-    <ion-row *ngFor="let user of users; let i = index" style="border-bottom: 1px solid rgba(0,0,0,0.1);">
-      <ion-col size="1">{{user['id'] }}</ion-col>
-      <ion-col size="4">{{user['name'] }}</ion-col>
-      <ion-col size="7">{{user['email'] }}</ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-list lines="full">
+    <ion-item *ngFor="let user of users; let i = index">
+      <ion-label>
+        <h3>{{user['name'] }}</h3>
+        <p>{{user['email'] }}</p>
+      </ion-label>
+    </ion-item>
+   
+  </ion-list>
 
 
 </ion-content>

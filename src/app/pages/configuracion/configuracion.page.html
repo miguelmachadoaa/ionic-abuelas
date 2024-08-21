@@ -18,8 +18,20 @@
     <ion-button (click)="importar()" expand="full">importar Informacion</ion-button>
   </ion-item>
 
+  <ion-item>
+    <ion-button (click)="usuarios()" expand="full">Importar Usuarios</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button (click)="getCrias()" expand="full">Importar Crias</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button (click)="getPesajes()" expand="full">Importar Pesajes</ion-button>
+  </ion-item>
+
   <ion-item *ngIf="load">
-    <p>{{message}}</p>
+    <p>Cargando</p>
   </ion-item>
 
 
@@ -27,9 +39,20 @@
     <ion-label>Enviar Informacion al administrador</ion-label>
   </ion-item>
   <ion-item>
-    <ion-button (click)="enviar()" expand="full">Enviar Informacion</ion-button>
+    <ion-button (click)="enviarCrias()" expand="full">Enviar Crias y Recria</ion-button>
   </ion-item>
 
+  <ion-item>
+    <ion-button (click)="enviarPesaje()" expand="full">Enviar Pesaje</ion-button>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>Perfil de Usuario</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="logout()" expand="full">Cerrar Session</ion-button>
+  </ion-item>
 
   
 </ion-content>

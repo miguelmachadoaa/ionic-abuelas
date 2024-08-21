@@ -21,6 +21,10 @@
                     "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
                 },
                 {
+                    "column": "cria_id",
+                    "value": "TEXT NOT NULL "
+                },
+                {
                     "column": "lote",
                     "value": "TEXT NOT NULL "
                 },
@@ -66,6 +70,10 @@
                     "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
                 },
                 {
+                    "column": "cria_id",
+                    "value": "TEXT NOT NULL "
+                },
+                {
                     "column": "consumo",
                     "value": "TEXT NOT NULL "
                 },
@@ -85,6 +93,10 @@
                 {
                     "column": "id",
                     "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "pesaje_id",
+                    "value": "TEXT NOT NULL "
                 },
                 {
                     "column": "lote",
@@ -114,6 +126,10 @@
                 {
                     "column": "id",
                     "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "pesaje_id",
+                    "value": "TEXT NOT NULL "
                 },
                 {
                     "column": "peso",

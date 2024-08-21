@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Device } from '@capacitor/device';
 import { Platform } from '@ionic/angular';
 import { SqliteService } from './services/sqlite.service';
+import { LoginService } from './services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +14,14 @@ export class AppComponent {
 
   public isWeb: boolean;
   public load: boolean;
+  public isLogin: boolean;
 
   constructor(
     private platform: Platform,
-    private sqlite: SqliteService) {
+    private sqlite: SqliteService,
+    private loginService: LoginService,
+    private router: Router
+  ) {
     this.isWeb = false;
     this.load = false;
     this.initApp();
@@ -34,8 +40,20 @@ export class AppComponent {
       // Esperamos a que la base de datos este lista
       this.sqlite.dbReady.subscribe(load => {
         this.load = load;
+        this.verifyLogin();
+
       })
     })
+
+  }
+
+  verifyLogin(){
+
+      if(!this.loginService.isAuthenticated( )){
+        this.router.navigate(['/login']);
+      }else{
+        this.router.navigate(['/configuracion']);
+      }
 
   }
 }

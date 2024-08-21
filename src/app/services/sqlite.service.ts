@@ -65,6 +65,7 @@ export class SqliteService {
     // Sino la hemos creado, descargamos y creamos la base de datos
     if (!dbSetup.value) {
       this.downloadDatabase();
+      //await this.createUserAdmin();
     } else {
       // Nos volvemos a conectar
       this.dbName = await this.getDbName();
@@ -73,14 +74,12 @@ export class SqliteService {
       this.dbReady.next(true);
     }
 
-
   }
 
   downloadDatabase() {
 
     // Obtenemos el fichero assets/db/db.json
     this.http.get('assets/db/db.json').subscribe(async (jsonExport: JsonSQLite) => {
-
 
       const jsonstring = JSON.stringify(jsonExport);
       // Validamos el objeto
@@ -226,14 +225,6 @@ export class SqliteService {
       return changes;
     }).catch(err => Promise.reject(err))
   }
-
-  /** crias  */
-
-
-  
-
-
-
 
 
 }

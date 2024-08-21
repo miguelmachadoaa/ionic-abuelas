@@ -28,7 +28,7 @@ export class UsersService {
 
       values.push(element.name);
       values.push(element.email);
-      values.push(element.email);
+      values.push(element.pass);
 
       i++;
     }
@@ -50,6 +50,33 @@ export class UsersService {
       if (this.sqlite.isWeb) {
         CapacitorSQLite.saveToStore({ database: dbName });
       }
+      return changes;
+    }).catch(err => Promise.reject(err))
+  }
+
+  async createUserAdmin() {
+    // Sentencia para insertar un registro
+    let sql = 'INSERT INTO usuarios (name, email, password) VALUES (?, ?, ?)';
+    // Obtengo la base de datos
+    const dbName = await this.sqlite.getDbName();
+    // Ejecutamos la sentencia
+    return CapacitorSQLite.executeSet({
+      database: dbName,
+      set: [
+        {
+          statement: sql,
+          values: [
+            'admin','admin@gmail.com','8ce87b8ec346ff4c80635f667d1592ae'
+          ]
+        }
+      ]
+    }).then((changes: capSQLiteChanges) => {
+      // Si es web, debemos guardar el cambio en la webstore manualmente
+      if (this.sqlite.isWeb) {
+        CapacitorSQLite.saveToStore({ database: dbName });
+      }
+      console.log(changes);
+
       return changes;
     }).catch(err => Promise.reject(err))
   }

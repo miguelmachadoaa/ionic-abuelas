@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SqliteService } from '../../services/sqlite.service';
-import { ApiService } from '../../services/api.service';
 import { CriasService } from 'src/app/services/crias.service';
 
 @Component({
@@ -39,7 +37,7 @@ export class CriasPage implements OnInit {
 
   read(){
     // Leemos los datos de la base de datos
-    this.criasService.readCriasDetalle().then( (crias: string[]) => {
+    this.criasService.readCrias().then( (crias: string[]) => {
       this.crias = crias;
       console.log("Leido");
       console.log(this.crias);
@@ -48,30 +46,10 @@ export class CriasPage implements OnInit {
       console.error("Error al leer");
     })
   }
-  
 
   ngOnInit() {
   }
 
-  create(){
-    // Creamos un elemento en la base de datos
-    this.criasService.createCriasDetalle(this.consumo, this.mortalidad, this.currentDate).then( (changes) =>{
-      console.log(changes);
-      console.log("Creado");
-      this.consumo = '';
-      this.mortalidad = '';
-      this.read(); // Volvemos a leer
-    }).catch(err => {
-      console.error(err);
-      console.error("Error al crear");
-    })
-  }
-
-  update(i:any){
-
-  }
-  delete(i:any){
-
-  }
+ 
 
 }

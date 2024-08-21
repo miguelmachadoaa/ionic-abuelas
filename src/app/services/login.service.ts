@@ -6,6 +6,7 @@ import { Preferences } from '@capacitor/preferences';
 import { JsonSQLite } from 'jeep-sqlite/dist/types/interfaces/interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { SqliteService } from './sqlite.service';
+import { Md5 } from 'ts-md5';
 
 @Injectable({
   providedIn: 'root'
@@ -14,36 +15,51 @@ export class LoginService {
 
   constructor(
     private sqlite: SqliteService,
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   async login(email:string, password:string) {
-    // Sentencia para leer todos los registros
-    let sql = 'SELECT * FROM usuarios where email = ? limit 1 ';
-    // Obtengo la base de datos
+
+    let sql = 'SELECT * FROM usuarios where email = ? and password = ? limit 1 ';
+   
     const dbName = await this.sqlite.getDbName();
-    // Ejecutamos la sentencia
+
+    const pass = Md5.hashStr(password);
+  
     return CapacitorSQLite.query({
       database: dbName,
       statement: sql,
-      values: [email] // necesario para android
-    }).then((response: capSQLiteValues) => {
+      values: [email, pass] // necesario para android
+    }).then(async (response: capSQLiteValues) => {
       let users: string[] = [];
 
-      // Si es IOS y hay datos, elimino la primera fila
-      // Esto se debe a que la primera fila es informacion de las tablas
+   
       if (this.sqlite.isIOS && response.values.length > 0) {
         response.values.shift();
       }
 
-      // recorremos los datos
+      
       for (const element of response.values) {
         const user = element;
         users.push(user);
       }
+
+      if(users.length>0){
+        localStorage.setItem('user', JSON.stringify(users[0]))
+      }
+
       return users;
 
     }).catch(err => Promise.reject(err))
   }
+
+  logout() {
+    localStorage.removeItem('user');
+  }
+
+  isAuthenticated() {
+    return localStorage.getItem('user')!=null ? true: false;
+  }
+
 
 }
