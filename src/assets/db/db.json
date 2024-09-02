@@ -14,6 +14,19 @@
             ]
         },
         {
+            "name": "config",
+            "schema": [
+                {
+                    "column": "id",
+                    "value": "INTEGER PRIMARY KEY AUTOINCREMENT"
+                },
+                {
+                    "column": "ip",
+                    "value": "TEXT NOT NULL"
+                }
+            ]
+        },
+        {
             "name": "crias",
             "schema": [
                 {

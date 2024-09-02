@@ -11,15 +11,28 @@
     </ion-toolbar>
   </ion-header>
 
+
+  <ion-item>
+    <ion-input label="IP: "   type="text" [(ngModel)]="ip" name="ip"></ion-input>
+    <ion-button (click)="updateIp()">
+      <ion-icon name="add-outline"></ion-icon> Actualizar IP
+    </ion-button>
+  </ion-item>
+
+
+
   <ion-item>
     <ion-label>Importar informacion desde administrador</ion-label>
   </ion-item>
   <ion-item>
-    <ion-button (click)="importar()" expand="full">importar Informacion</ion-button>
+    <ion-button 
+    (click)="importar()" 
+    expand="full">importar Informacion</ion-button>
   </ion-item>
 
   <ion-item>
     <ion-button (click)="usuarios()" expand="full">Importar Usuarios</ion-button>
+
   </ion-item>
 
   <ion-item>
@@ -52,6 +65,10 @@
   </ion-item>
   <ion-item>
     <ion-button (click)="logout()" expand="full">Cerrar Session</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <p>{{error}}</p>
   </ion-item>
 
   

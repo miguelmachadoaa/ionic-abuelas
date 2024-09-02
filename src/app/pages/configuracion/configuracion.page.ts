@@ -23,6 +23,7 @@ export class ConfiguracionPage implements OnInit {
   public crias : any;
   public pesaje : any;
   public usersMessage: string;
+  public ip: string;
 
   constructor(
     private sqlite: SqliteService,
@@ -40,11 +41,16 @@ export class ConfiguracionPage implements OnInit {
     this.message = '';
     this.usersMessage = '';
     this.error = '';
+    this.ip = '192.168.0.2';
+    this.readIp();
 
   }
 
   ngOnInit() {
   }
+
+  
+
 
   async presentAlert(message:string) {
     const alert = await this.alertController.create({
@@ -68,6 +74,12 @@ export class ConfiguracionPage implements OnInit {
 
         this.load = false;
         this.message = 'Data cargada satisfactoriamente';
+      },
+      (error) => {
+        this.error = this.error + error.message+' status: '+error.status+' statustext: '+error.statustext+ 'url: '+error.url;
+
+        this.presentAlert('Error al conectar verificar IP '+error.message);
+        this.error = this.error + error;
       });
 
     }
@@ -84,8 +96,48 @@ export class ConfiguracionPage implements OnInit {
 
         this.load = false;
         this.message = 'Data cargada satisfactoriamente';
+      },
+      (error) => {
+        console.log(error);
+        this.error = this.error + error.message+' status: '+error.status+' statustext: '+error.statustext+ 'url: '+error.url;
+        this.presentAlert('Error al conectar verificar IP '+error.message);
       });
 
+    }
+
+    readIp(){
+      // Leemos los datos de la base de datos
+      this.sqlite.readIp().then( (ip: string) => {
+        if(ip){
+          this.ip = ip;
+        }else{
+          this.ip = 'http://192.168.0.2';
+          this.sqlite.createIp(this.ip);
+        }
+        localStorage.setItem('ip', this.ip);
+        console.log(this.ip);
+      }).catch(err => {
+        console.error(err);
+        this.error = this.error + err;
+        console.error("Error al leer");
+      })
+    }
+
+    updateIp(){
+
+      this.sqlite.updateIp(this.ip).then( (changes) =>{
+        console.log("Creado");
+        this.usersMessage = 'Se ha creado actualizado la ip  ';
+        this.presentAlert(this.usersMessage);
+        localStorage.setItem('ip', this.ip);
+      }).catch(err => {
+        console.error(err);
+        this.error = this.error + err;
+        console.error("Error al crear");
+        this.error='Error al crear usuarios';
+        this.presentAlert('Error al conectar verificar IP');
+      })
+  
     }
 
     saveUsers(){
@@ -98,6 +150,7 @@ export class ConfiguracionPage implements OnInit {
             console.error(err);
             console.error("Error al crear");
             this.error='Error al crear usuarios';
+            this.presentAlert('Error al conectar verificar IP');
           })
       
     }
@@ -113,6 +166,7 @@ export class ConfiguracionPage implements OnInit {
       }).catch(err => {
         console.error(err);
         console.error("Error al borrar");
+        this.presentAlert('Error al conectar verificar IP');
       })
     }
 
@@ -129,6 +183,13 @@ export class ConfiguracionPage implements OnInit {
 
         this.load = false;
         this.message = 'Data cargada satisfactoriamente';
+      },
+      (error) => {
+        this.error = this.error + error.message+' status: '+error.status+' statustext: '+error.statustext+ 'url: '+error.url;
+
+        console.log(error);
+        this.error = this.error + error;
+        this.presentAlert('Error al conectar verificar IP '+error.message);
       });
 
     }
@@ -142,6 +203,7 @@ export class ConfiguracionPage implements OnInit {
           }).catch(err => {
             console.error(err);
             console.error("Error al crear");
+            this.presentAlert('Error al conectar verificar IP');
           })
       
     }
@@ -156,6 +218,7 @@ export class ConfiguracionPage implements OnInit {
       }).catch(err => {
         console.error(err);
         console.error("Error al borrar");
+        this.presentAlert('Error al conectar verificar IP');
       })
     }
 
@@ -175,6 +238,7 @@ export class ConfiguracionPage implements OnInit {
       }).catch(err => {
         console.error(err);
         console.error("Error al leer");
+        this.presentAlert('Error al conectar verificar IP');
       })
     }
 
@@ -192,8 +256,11 @@ export class ConfiguracionPage implements OnInit {
         });
 
       }).catch(err => {
+
+
         console.error(err);
         console.error("Error al leer");
+        this.presentAlert('Error al conectar verificar IP');
       })
     }
 
@@ -210,6 +277,12 @@ export class ConfiguracionPage implements OnInit {
   
         this.load = false;
         this.message = 'Data cargada satisfactoriamente';
+      },
+      (error) => {
+        this.error = this.error + error.message+' status: '+error.status+' statustext: '+error.statustext+ 'url: '+error.url;
+
+        this.error = this.error + error;
+        this.presentAlert('Error al conectar verificar IP '+error.message);
       });
   
     }
@@ -224,6 +297,7 @@ export class ConfiguracionPage implements OnInit {
       }).catch(err => {
         console.error(err);
         console.error("Error al borrar");
+        this.presentAlert('Error al conectar verificar IP');
       })
     }
 
@@ -236,6 +310,7 @@ export class ConfiguracionPage implements OnInit {
       }).catch(err => {
         console.error(err);
         console.error("Error al crear");
+        this.presentAlert('Error al conectar verificar IP');
       })
   
     }

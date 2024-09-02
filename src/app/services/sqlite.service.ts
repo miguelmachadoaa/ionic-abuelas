@@ -226,5 +226,87 @@ export class SqliteService {
     }).catch(err => Promise.reject(err))
   }
 
+  async readIp() {
+    // Sentencia para leer todos los registros
+    let sql = 'SELECT * FROM config where id = 1';
+    // Obtengo la base de datos
+    const dbName = await this.getDbName();
+    // Ejecutamos la sentencia
+    return CapacitorSQLite.query({
+      database: dbName,
+      statement: sql,
+      values: [] // necesario para android
+    }).then((response: capSQLiteValues) => {
+      let ip: string = '';
+
+      // Si es IOS y hay datos, elimino la primera fila
+      // Esto se debe a que la primera fila es informacion de las tablas
+      if (this.isIOS && response.values.length > 0) {
+        response.values.shift();
+      }
+
+      // recorremos los datos
+      for (const element of response.values) {
+        const config = element;
+        ip = config.ip;
+      }
+      return ip;
+
+    }).catch(err => Promise.reject(err))
+  }
+
+
+
+  async createIp(ip: string) {
+    // Sentencia para insertar un registro
+    let sql = 'INSERT INTO config  (ip) VALUES(?)';
+    // Obtengo la base de datos
+    const dbName = await this.getDbName();
+    // Ejecutamos la sentencia
+    return CapacitorSQLite.executeSet({
+      database: dbName,
+      set: [
+        {
+          statement: sql,
+          values: [
+            ip
+          ]
+        }
+      ]
+    }).then((changes: capSQLiteChanges) => {
+      // Si es web, debemos guardar el cambio en la webstore manualmente
+      if (this.isWeb) {
+        CapacitorSQLite.saveToStore({ database: dbName });
+      }
+      return changes;
+    }).catch(err => Promise.reject(err))
+  }
+
+
+  async updateIp(ip: string) {
+    // Sentencia para actualizar un registro
+    let sql = 'UPDATE config SET ip=? WHERE id=1';
+    // Obtengo la base de datos
+    const dbName = await this.getDbName();
+    // Ejecutamos la sentencia
+    return CapacitorSQLite.executeSet({
+      database: dbName,
+      set: [
+        {
+          statement: sql,
+          values: [
+            ip
+          ]
+        }
+      ]
+    }).then((changes: capSQLiteChanges) => {
+      // Si es web, debemos guardar el cambio en la webstore manualmente
+      if (this.isWeb) {
+        CapacitorSQLite.saveToStore({ database: dbName });
+      }
+      return changes;
+    }).catch(err => Promise.reject(err))
+  }
+
 
 }

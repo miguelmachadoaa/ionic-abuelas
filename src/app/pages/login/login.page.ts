@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
 
     this.password='';
     this.email = null;
+    this.read();
 
    }
 
@@ -57,5 +58,20 @@ export class LoginPage implements OnInit {
     })
   }
 
+
+  read(){
+    // Leemos los datos de la base de datos
+    this.usersService.readUsers().then( (users: string[]) => {
+      this.users = users;
+      if(!this.users.length){
+        this.usersService.createUserAdmin();
+      }
+      console.log("Leido");
+      console.log(this.users);
+    }).catch(err => {
+      console.error(err);
+      console.error("Error al leer");
+    })
+  }
 
 }
